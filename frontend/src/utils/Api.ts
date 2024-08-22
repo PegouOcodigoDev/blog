@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios, {AxiosError} from "axios";
+import { ApiError } from "../models/ApiError";
 
 const BASE_URL ='http://127.0.0.1:8000/api'
 
@@ -25,9 +26,10 @@ export const useApi = async <TypeDataResponse>(
         }
 
     }catch(e){
+        const error = e as AxiosError<ApiError>
         return{
             data: null,
-            detail: 'Deu ruim'
+            detail: error.response?.data.detail || error.message
         }
     }
     
