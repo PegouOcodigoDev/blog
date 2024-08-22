@@ -3,13 +3,19 @@
 @tailwind utilities;
 
 .card {
-    @apply w-[40%] p-5 m-auto mt-[2em] rounded-md shadow-sm border border-neutral-400
-    shadow-black flex flex-col justify-center items-center gap-5
-
+  @apply w-[40%] p-5 m-auto mt-[1em] rounded-md shadow-sm border border-neutral-400
+    shadow-black flex flex-col justify-center items-center gap-5;
 }
 
-.btn-primary{
-    @apply inline-block rounded-lg border border-emerald-500 bg-emerald-600 px-12 py-2 text-sm font-medium text-white hover:bg-transparent
-     hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500
+.btn-primary {
+  @apply inline-block rounded-lg border border-emerald-500 bg-emerald-600 px-12 py-2 text-sm font-medium text-white hover:bg-transparent
+     hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500;
 }
 
+.danger-text {
+  @apply text-red-500 font-mono text-sm text-center;
+}
+
+.title-text {
+  @apply text-emerald-500 font-serif font-bold text-xl;
+}

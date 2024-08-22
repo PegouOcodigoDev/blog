@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import SignUp from "./pages/SignUp";
 import { Provider } from "react-redux";
-import Layout from "./pages/Layout";
 import { store } from "./redux/store";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
