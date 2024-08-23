@@ -25,7 +25,7 @@ export default () => {
     <>
       <div className="card">
         <h2 className="title-text">Crie sua conta</h2>
-        {message && <p className="danger-text">{message}</p>}
+        {message && <strong className="danger-text">{message}</strong>}
         {}
         <Input
           label="Nome"
