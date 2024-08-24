@@ -1,8 +1,13 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ApiError } from "../models/ApiError";
-import { handleGetAccessToken } from "./Auth";
+import { handleGetAccessToken, handleGetRefreshToken } from "./Auth";
 
 const BASE_URL = "http://127.0.0.1:8000/api";
+
+export const refreshAccessToken = async () => {
+  const response = await axios.post(`${BASE_URL}/token/refresh/`, {refresh: handleGetRefreshToken()})
+  return response.data.access_token;
+}
 
 export const useApi = async <TypeDataResponse>(
   endpoint: string,
@@ -40,7 +45,30 @@ export const useApi = async <TypeDataResponse>(
     const axiosError = error as AxiosError<ApiError>;
 
     if(axiosError.response?.status === 401){
-      
+      try {
+        const newAccessToken = await refreshAccessToken();
+        localStorage.setItem("access_token", newAccessToken);
+
+        headers["Authorization"] = `Bearer ${newAccessToken}`;
+
+        const response: AxiosResponse<TypeDataResponse> = await axios({
+          url: `${BASE_URL}/${endpoint}`,
+          method,
+          data: method !== "GET" ? data : undefined,
+          params: method === "GET" ? data : undefined,
+          headers,
+        });
+
+        return {
+          data: response.data,
+          detail: "",
+        };
+      } catch (refreshError) {
+        return {
+          data: null,
+          detail: "Falha a renovar o token de acesso.",
+        };
+      }
     }
 
     return {
