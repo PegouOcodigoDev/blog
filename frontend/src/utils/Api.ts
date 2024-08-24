@@ -39,6 +39,10 @@ export const useApi = async <TypeDataResponse>(
   } catch (error) {
     const axiosError = error as AxiosError<ApiError>;
 
+    if(axiosError.response?.status === 401){
+      
+    }
+
     return {
       data: null,
       detail: axiosError.response?.data.detail || axiosError.message,
