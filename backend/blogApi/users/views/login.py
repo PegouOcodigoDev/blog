@@ -1,36 +1,42 @@
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from users.auth import Authentication
 from users.serializers import UserSerializer
-from rest_framework import status
+from users.auth import Authentication
+from rest_framework.permissions import AllowAny
 from rest_framework.exceptions import APIException
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken # type: ignore
 
-class SignUp(APIView):
+class Login(APIView):
     
     permission_classes = [AllowAny]
     
     def post(self, request:Request) -> Response:
         email = request.data.get("email")
-        name = request.data.get("name")
         password = request.data.get("password")
         
         try:
-            user = Authentication.sign_up(name,email,password)
+            user = Authentication.sign_in(email, password)
         except APIException as e:
             return Response({
                 "detail": str(e)
             },
-            status=status.HTTP_400_BAD_REQUEST
+            status=status.HTTP_401_UNAUTHORIZED,           
             )
         
         serializer = UserSerializer(user)
         
+        token = RefreshToken.for_user(user)
+        
         return Response({
             "user": serializer.data,
+            "refresh": str(token),
+            "access": str(token.access_token),
         },
-        status=status.HTTP_201_CREATED,                
+        status=status.HTTP_200_OK,                
         )
+        
+        
         
         

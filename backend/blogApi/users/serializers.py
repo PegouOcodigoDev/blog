@@ -8,5 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
-            'email'
+            'email',
+            'is_active',
+            'is_admin',
         )

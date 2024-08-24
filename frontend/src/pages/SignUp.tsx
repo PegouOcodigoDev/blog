@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "./components/Input";
-import signUp from "../utils/Requests";
+import {createUser} from "../utils/Requests";
 import "../index.css";
 import { useNavigate } from "react-router";
 
@@ -11,14 +11,16 @@ export default () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUp = async () => {
-    const response = await signUp({ name, email, password });
+  const handleCreateUser = async () => {
+    const response = await createUser({ name, email, password });
 
-    if (!response.detail) {
-      navigate("/login");
-    } else {
-      setMessage(response.detail);
+    if (response.detail) {
+      setMessage(response.detail)
+      return;
     }
+
+    navigate("/login");
+    
   };
 
   return (
@@ -49,7 +51,7 @@ export default () => {
             setPassword(e.target.value)
           }
         ></Input>
-        <button className="btn-primary" onClick={handleSignUp}>
+        <button className="btn-primary" onClick={handleCreateUser}>
           Cadastrar-se
         </button>
       </div>

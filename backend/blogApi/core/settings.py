@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'users',
-    'corsheaders'
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -52,6 +52,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+AUTH_USER_MODEL = 'users.user'
 
 from datetime import timedelta
 
