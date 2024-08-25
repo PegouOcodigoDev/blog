@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ApiError } from "../models/ApiError";
-import { handleGetAccessToken, handleGetRefreshToken } from "./Auth";
+import { handleGetAccessToken, handleGetRefreshToken } from "./auth";
 
 const BASE_URL = "http://127.0.0.1:8000/api";
 

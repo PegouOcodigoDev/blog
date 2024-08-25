@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Input from "./components/Input";
-import {createUser} from "../utils/Requests";
-import "../index.css";
+import {createUser} from "../utils/requests";
 import { useNavigate } from "react-router";
 
 export default () => {
@@ -28,7 +27,6 @@ export default () => {
       <div className="card">
         <h2 className="title-text">Crie sua conta</h2>
         {message && <strong className="danger-text">{message}</strong>}
-        {}
         <Input
           label="Nome"
           value={name}

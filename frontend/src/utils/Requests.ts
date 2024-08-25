@@ -1,5 +1,5 @@
 import { User, Logged } from "../models/User";
-import { useApi } from "./Api";
+import { useApi } from "./api";
 
 export const createUser = async ({name, email, password}: User) => {
     const response = await useApi<User>('users/signup','POST', {name, email, password}, false);

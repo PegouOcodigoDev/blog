@@ -1,11 +1,11 @@
-const ACCESS_TOKEN = localStorage.getItem("access_token");
-const REFRESH_TOKEN = localStorage.getItem("refresh_token");
+const ACCESS_TOKEN_KEY = "access_token";
+const REFRESH_TOKEN_KEY = "refresh_token";
 
-export const handleGetAccessToken = () => localStorage.getItem(ACCESS_TOKEN ?? "");
+export const handleGetAccessToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
 
-export const handleGetRefreshToken = () => localStorage.getItem(REFRESH_TOKEN ?? "");
+export const handleGetRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
 
 export const logOut = () => {
-    localStorage.removeItem(`${ACCESS_TOKEN}`);
-    localStorage.removeItem(`${REFRESH_TOKEN}`)
-}
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
+};

@@ -1,13 +1,16 @@
 import { useState } from "react"
 import Input from "./components/Input"
 import { Link, useNavigate } from "react-router-dom"
-import { login } from "../utils/Requests"
+import { login } from "../utils/requests"
+import { useDispatch } from "react-redux"
+import { setUser } from "../redux/reducers/userReducer"
 
 export default () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleLogin = async () => {
         const response = await login({email, password});
@@ -16,15 +19,16 @@ export default () => {
             return;
         }
 
-        const access = response.data?.access;
-        const refresh = response.data?.refresh;
+        if (response.data){
+            const { refresh, access, ...user } = response.data;
 
-        if(access && refresh){
             localStorage.setItem('access_token', access);
             localStorage.setItem('refresh_token', refresh)
+
+            dispatch(setUser(user));
+
+            navigate('/')
         }
-        
-        navigate('/')
     }
 
     return (
