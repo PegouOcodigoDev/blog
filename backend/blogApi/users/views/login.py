@@ -17,7 +17,7 @@ class Login(APIView):
         password = request.data.get("password")
         
         try:
-            user = Authentication.sign_in(email, password)
+            user = Authentication.login(email, password)
         except APIException as e:
             return Response({
                 "detail": str(e)

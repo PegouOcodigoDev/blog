@@ -48,7 +48,7 @@ class Authentication:
         return created_user
     
     @staticmethod
-    def sign_in(email: str, password: str):
+    def login(email: str, password: str):
         user = authenticate(email=email, password=password)
         
         if user is None:
