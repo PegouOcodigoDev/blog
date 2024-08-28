@@ -11,12 +11,12 @@ class Category(models.Model):
     
     class Meta:
         db_table = "category"
-        ordering = ["name"]
+        ordering = ["name"] 
 
 class Post(models.Model):
     STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
+        ("draft", "Draft"),
+        ("published", "Published"),
     )
 
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="posts")
@@ -25,7 +25,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=100, unique=True, blank=True)
     content = models.TextField()
     likes = models.IntegerField(default=0)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     comment_count = models.IntegerField(default=0)
