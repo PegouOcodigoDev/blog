@@ -5,6 +5,7 @@ from rest_framework.request import Request
 class GenericListCreateAPIView(mixins.ListModelMixin,
                                mixins.CreateModelMixin,
                                generics.GenericAPIView):
+    
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request: Request, *args, **kwargs):

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from backend.blogApi.posts.serializers import image
 from posts.models.post import Post,ImagePost
 from posts.serializers import category 
 
@@ -11,7 +10,7 @@ class ImagePostSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    images = image.ImagePostSerializer(many=True, required=False)
+    images = ImagePostSerializer(many=True, required=False)
     category = category.CategorySerializer(many=True, required=False)
 
     class Meta:

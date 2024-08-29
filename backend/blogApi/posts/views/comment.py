@@ -1,4 +1,4 @@
-from posts.models import Comment
+from posts.models.comment import Comment
 from posts.serializers.comment import CommentSerializer
 from posts.views.base import GenericListCreateAPIView, GenericRetrieveUpdateDestroyAPIView
 from django.core.exceptions import PermissionDenied

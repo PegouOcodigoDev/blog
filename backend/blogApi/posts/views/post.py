@@ -1,11 +1,17 @@
-from posts.models import Post
+from posts.models.post import Post
 from posts.serializers.post import PostSerializer
 from posts.views.base import GenericListCreateAPIView, GenericRetrieveUpdateDestroyAPIView
 from django.core.exceptions import PermissionDenied
+from rest_framework.filters import SearchFilter
+from posts.utils.pagination import CustomPagination
 
 class PostList(GenericListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ["title"]
+    pagination_class = CustomPagination
+    
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
