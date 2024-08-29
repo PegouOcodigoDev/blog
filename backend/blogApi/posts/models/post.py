@@ -1,17 +1,10 @@
 from django.db import models
 from users.models import User
+from posts.models.category import Category
 from django.utils.text import slugify
 from posts.utils.file_utils import image_upload_to
 
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    
-    def __str__(self) -> str:
-        return self.name
-    
-    class Meta:
-        db_table = "category"
-        ordering = ["name"] 
+
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -41,7 +34,7 @@ class Post(models.Model):
     class Meta:
         db_table = "post"        
         ordering = ["-created_at", "title"]
-
+        
 class ImagePost(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to=image_upload_to)
@@ -51,16 +44,3 @@ class ImagePost(models.Model):
     
     class Meta:
         db_table = "image"
-
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    content = models.TextField(blank=False, null=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self) -> str:
-        return f"Comment by {self.author.name} on {self.post.title}"
-    
-    class Meta:
-        db_table = "comment"
-        ordering = ["-created_at"]

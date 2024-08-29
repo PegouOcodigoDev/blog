@@ -25,6 +25,9 @@ class GenericRetrieveUpdateDestroyAPIView(mixins.RetrieveModelMixin,
 
     def put(self, request: Request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-
+    
+    def patch(self, request: Request, *args, **kwargs):
+        return self.update(request, *args, **kwargs, partial=True)
+    
     def delete(self, request: Request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
