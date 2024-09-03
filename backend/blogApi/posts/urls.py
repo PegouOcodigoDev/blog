@@ -1,5 +1,5 @@
 from django.urls import path
-from posts.views import category, post, comment
+from posts.views import category, post, comment, image
 
 urlpatterns = [
     path("categories", category.CategoryList.as_view()),
@@ -11,4 +11,6 @@ urlpatterns = [
     path('comments', comment.CommentList.as_view()),
     path('comments/<int:pk>/', comment.CommentDetail.as_view()),
     
+    path('images', image.ImagePostList.as_view()),
+    path('images/<int:pk>/', image.ImagePostDetail.as_view())
 ]

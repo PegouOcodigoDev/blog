@@ -2,9 +2,6 @@ from django.db import models
 from users.models import User
 from posts.models.category import Category
 from django.utils.text import slugify
-from posts.utils.file_utils import image_upload_to
-
-
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -35,12 +32,3 @@ class Post(models.Model):
         db_table = "post"        
         ordering = ["-created_at", "title"]
         
-class ImagePost(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(upload_to=image_upload_to)
-    
-    def __str__(self) -> str:
-        return f"Image for {self.post.title}"
-    
-    class Meta:
-        db_table = "image"
