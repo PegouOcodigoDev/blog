@@ -11,7 +11,7 @@ export const refreshAccessToken = async () => {
 
 export const useApi = async <TypeDataResponse>(
   endpoint: string,
-  method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+  method: "GET" | "POST" | "PUT" | "PATCH" |"DELETE" = "GET",
   data?: object,
   withAuth: boolean = true
 ): Promise<{

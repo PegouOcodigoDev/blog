@@ -9,6 +9,4 @@ class UserSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'email',
-            'is_active',
-            'is_admin',
         )
