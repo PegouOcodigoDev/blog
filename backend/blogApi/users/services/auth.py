@@ -16,7 +16,7 @@ class Authentication:
             raise APIException("É necessário fornecer uma senha.")
     
     @staticmethod
-    def _validate_password(password: str):
+    def validate_password(password: str):
         if len(password) <= 8:
             raise APIException("A senha deve ter pelo menos 8 caracteres.")
         if not any(char.isdigit() for char in password):
@@ -36,7 +36,7 @@ class Authentication:
         if User.objects.filter(email=email).exists():
             raise APIException("Este email já está registrado.")
 
-        Authentication._validate_password(password)
+        Authentication.validate_password(password)
 
         created_user = User.objects.create(
             name=name.strip(),

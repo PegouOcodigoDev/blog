@@ -10,3 +10,11 @@ class UserSerializer(serializers.ModelSerializer):
             'name',
             'email',
         )
+        
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    uidb64 = serializers.CharField()
+    token = serializers.CharField()
+    new_password = serializers.CharField()
